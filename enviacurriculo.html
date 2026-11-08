@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum Vitae</title>
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .cv-container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 650px;
+            border: 2px solid #555555;
+            padding: 30px 40px;
+            box-sizing: border-box;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* Encabezado */
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-bottom: 1px solid #777777;
+            margin-bottom: 25px;
+        }
+
+        .header-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            vertical-align: middle;
+        }
+
+        .photo-box {
+            width: 90px;
+            border-left: 1px solid #777777;
+            padding: 10px 0 15px 15px;
+            text-align: center;
+        }
+
+        .photo-border {
+            border: 1px solid #777777;
+            height: 95px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            background-color: #fafafa;
+        }
+
+        .photo-border input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Secciones */
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            margin-top: 20px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .section-divider {
+            border: none;
+            border-top: 1px solid #777777;
+            margin-bottom: 12px;
+        }
+
+        /* Distribución de campos */
+        .form-row {
+            display: flex;
+            margin-bottom: 6px;
+            align-items: center;
+        }
+
+        .col {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .col:not(:last-child) {
+            margin-right: 15px;
+        }
+
+        label {
+            font-size: 14px;
+            white-space: nowrap;
+            margin-right: 6px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="email"],
+        input[type="tel"] {
+            flex: 1;
+            border: none;
+            border-bottom: 1px dotted #999;
+            background: transparent;
+            font-family: inherit;
+            font-size: 14px;
+            padding: 2px 4px;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-bottom: 1px solid #000;
+            background-color: #fbfbfb;
+        }
+
+        .field-block {
+            display: flex;
+            margin-bottom: 6px;
+            align-items: flex-start;
+        }
+
+        .field-block label {
+            margin-top: 3px;
+        }
+
+        textarea {
+            flex: 1;
+            border: 1px solid #ccc;
+            font-family: inherit;
+            font-size: 14px;
+            padding: 4px;
+            resize: vertical;
+        }
+
+        /* Estilos de Bloques Dinámicos de Experiencia */
+        .experiencia-item {
+            position: relative;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        .experiencia-item:not(:first-child) {
+            border-top: 1px dashed #bbb;
+            padding-top: 10px;
+        }
+
+        .btn-add-exp {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background-color: transparent;
+            color: #1a4f8a;
+            border: 1px dashed #1a4f8a;
+            border-radius: 3px;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 13px;
+            padding: 4px 10px;
+            cursor: pointer;
+            margin-top: 4px;
+            margin-bottom: 10px;
+        }
+
+        .btn-add-exp:hover {
+            background-color: #f0f4f9;
+        }
+
+        .btn-remove-exp {
+            display: inline-block;
+            background: none;
+            border: none;
+            color: #b02a37;
+            font-family: inherit;
+            font-size: 12px;
+            text-decoration: underline;
+            cursor: pointer;
+            float: right;
+            margin-bottom: 4px;
+        }
+
+        .btn-remove-exp:hover {
+            color: #dc3545;
+        }
+
+        /* Pie y Acreditación */
+        .declaration-text {
+            font-size: 13px;
+            margin-top: 25px;
+            margin-bottom: 6px;
+        }
+
+        .footer-action {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .btn-submit {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 15px;
+            padding: 8px 25px;
+            background-color: #f0f0f0;
+            border: 1px solid #777;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-submit:hover {
+            background-color: #e2e2e2;
+        }
+    </style>
+</head>
+<body>
+
+<form class="cv-container" action="enviacurriculo.htm" method="post" enctype="multipart/form-data">
+    
+    <!-- Encabezado con Título y Cuadro de Foto -->
+    <table class="header-table">
+        <tr>
+            <td class="header-title">CURRICULUM VITAE</td>
+            <td class="photo-box">
+                <div class="photo-border" title="Haga clic para adjuntar foto">
+                    <span>FOTO</span>
+                    <input type="file" name="foto" accept="image/*">
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- 1. DATOS PERSONALES -->
+    <div class="section-title">DATOS PERSONALES</div>
+    <hr class="section-divider">
+
+    <div class="form-row">
+        <div class="col">
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="apellidos" required>
+        </div>
+        <div class="col">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <label for="dni">DNI:</label>
+            <input type="text" id="dni" name="dni" required>
+        </div>
+        <div class="col"></div>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <label for="fecha_nacimiento">Fecha De Nacimiento:</label>
+            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+        </div>
+        <div class="col">
+            <label for="lugar">Lugar:</label>
+            <input type="text" id="lugar" name="lugar">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <label for="localidad">Localidad:</label>
+            <input type="text" id="localidad" name="localidad">
+        </div>
+        <div class="col">
+            <label for="provincia">Provincia:</label>
+            <input type="text" id="provincia" name="provincia">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <label for="telefono">Teléfono:</label>
+            <input type="tel" id="telefono" name="telefono">
+        </div>
+        <div class="col"></div>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <label for="telefono_movil">Teléfono Móvil:</label>
+            <input type="tel" id="telefono_movil" name="telefono_movil">
+        </div>
+        <div class="col"></div>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <label for="email">E-Mail:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="col"></div>
+    </div>
+
+    <!-- 2. FORMACION Y ESTUDIOS -->
+    <div class="section-title">FORMACION Y ESTUDIOS</div>
+    <hr class="section-divider">
+
+    <div class="form-row">
+        <div class="col">
+            <label for="titulacion">Titulación:</label>
+            <input type="text" id="titulacion" name="titulacion">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <label for="idiomas">Idiomas:</label>
+            <input type="text" id="idiomas" name="idiomas">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <label for="conocimientos_informaticos">Conocimientos informáticos:</label>
+            <input type="text" id="conocimientos_informaticos" name="conocimientos_informaticos">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <label for="cursos_seminarios">Cursos y seminarios:</label>
+            <input type="text" id="cursos_seminarios" name="cursos_seminarios">
+        </div>
+    </div>
+
+    <!-- 3. EXPERIENCIA PROFESIONAL (DINÁMICA) -->
+    <div class="section-title">EXPERIENCIA PROFESIONAL</div>
+    <hr class="section-divider">
+
+    <!-- Contenedor donde se agregan los bloques de experiencia -->
+    <div id="experiencias-container">
+        <!-- Bloque inicial -->
+        <div class="experiencia-item">
+            <div class="form-row">
+                <div class="col">
+                    <label>Empresa:</label>
+                    <input type="text" name="empresa[]">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label>Fecha:</label>
+                    <input type="text" name="fecha[]" placeholder="Ej. 2024 - 2026">
+                </div>
+            </div>
+            <div class="field-block">
+                <label>Puesto/Actividad desarrollada:</label>
+                <textarea name="puesto_actividad[]" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón para añadir más experiencias -->
+    <button type="button" class="btn-add-exp" id="btn-add-experiencia">
+        + Agregar otra experiencia
+    </button>
+
+    <!-- 4. DATOS COMPLEMENTARIOS -->
+    <div class="section-title">DATOS COMPLEMENTARIOS</div>
+    <hr class="section-divider">
+
+    <div class="field-block">
+        <label for="datos_complementarios">•</label>
+        <textarea id="datos_complementarios" name="datos_complementarios" rows="3" placeholder="Otros datos de interés..."></textarea>
+    </div>
+
+    <!-- Pie del documento -->
+    <div class="declaration-text">
+        Todo lo expuesto anteriormente podrá ser acreditado, en caso de solicitud.
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <label for="lugar_fecha">(lugar y fecha):</label>
+            <input type="text" id="lugar_fecha" name="lugar_fecha">
+        </div>
+    </div>
+
+    <div class="footer-action">
+        <button type="submit" class="btn-submit">Enviar Currículum</button>
+    </div>
+
+</form>
+
+<!-- Script para la inserción y eliminación dinámica -->
+
+<script>
+    document.getElementById('btn-add-experiencia').addEventListener('click', function() {
+        var container = document.getElementById('experiencias-container');
+        
+        var newBlock = document.createElement('div');
+        newBlock.className = 'experiencia-item';
+        
+        newBlock.innerHTML = 
+            '<button type="button" class="btn-remove-exp" onclick="this.parentElement.remove()">[Eliminar]</button>' +
+            '<div style="clear: both;"></div>' +
+            '<div class="form-row">' +
+                '<div class="col">' +
+                    '<label>Empresa:</label>' +
+                    '<input type="text" name="empresa[]">' +
+                '</div>' +
+            '</div>' +
+            '<div class="form-row">' +
+                '<div class="col">' +
+                    '<label>Fecha:</label>' +
+                    '<input type="text" name="fecha[]" placeholder="Ej. 2024 - 2026">' +
+                '</div>' +
+            '</div>' +
+            '<div class="field-block">' +
+                '<label>Puesto/Actividad desarrollada:</label>' +
+                '<textarea name="puesto_actividad[]" rows="3"></textarea>' +
+            '</div>';
+        
+        container.appendChild(newBlock);
+    });
+</script>
+
+</body>
+</html>
